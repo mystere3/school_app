@@ -3,9 +3,9 @@ Rails.application.routes.draw do
   # See how all your routes lay out with "rake routes".
   
   # resources :students
-  binding.pry
+
   # options:
-  resources :students, only: [:index]
+  resources :students, only: [:index, :show]
  # other options --  exept: [:index]
 
   # You can have the root of your site routed with "root"
