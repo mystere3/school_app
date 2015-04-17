@@ -1,0 +1,9 @@
+<h1>Project: <%= @project.name %></h1>
+
+<%= link_to 'Back to Projects List', projects_path %>
+<%= link_to 'Back to Student List', students_path %>
+<%= link_to 'Edit Project', edit_project_path(@project) %>
+
+
+<h2><span>Created</span>: <%= time_ago_in_words(@project.created_at) %> ago</h2>
+

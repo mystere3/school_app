@@ -1,0 +1,27 @@
+
+
+<% if @student.present? %>
+  <h2><%= @student.full_name %>'s Projects</h2>
+<% else %>
+  <h1>Project List</h1>
+<% end %>
+
+<h3><%= link_to "Add New Project", new_project_path %></h3>
+<%= link_to 'Back to Student List', students_path %>
+
+<%= form_tag("/search", method: :get) do %>
+  <%= label_tag(:search, "Search") %>
+  <%= text_field_tag(:search) %>
+  <%= submit_tag("Search") %>
+  <% end %>
+
+<ul>
+  <% @projects.each do |project| %>
+    <li>
+    <span><%= link_to project.name, project_path(project) %></span> | 
+    <span><%= link_to "Delete", project_path(project), method: :delete, data: { confirm: "Ary you sure?"} %></span>
+    
+    </li>
+  <% end %>
+  
+</ul>

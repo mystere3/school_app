@@ -6,10 +6,16 @@ class StudentsController < ApplicationController
 
   def show
     @student = Student.find_by_id(params[:id])
+    @projects = @student.projects
   end
 
   def new
     @student = Student.new
+  end
+
+  def edit
+    @student = Student.find_by_id(params[:id])
+    # binding.pry
   end
 
   def create
@@ -25,6 +31,21 @@ class StudentsController < ApplicationController
     end
   end
     
+  def update
+    @student = Student.find_by_id(params[:id])
+
+    if @student.update_attributes(params[:student])
+      redirect_to student_path(@student), notice: 'Student was updated successfully'
+    else
+      flash[:alert] = 'There was an error updating the student'
+      render :edit
+    end
+    # If student is found call update on attributes on student
+    # and pass in field values
+    # 
+    # If student is not found
+    # render :edit page wih flass message imih 
+  end
 
   def destroy
     @student = Student.find_by_id(params[:id])
