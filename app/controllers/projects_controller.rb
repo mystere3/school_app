@@ -1,7 +1,9 @@
 class ProjectsController < ApplicationController  
 
+  before_action :authorize, except: [:index, :show]
+
   def index
-    binding.pry
+    # binding.pry
     if params[:search].present?
       @projects = Project.search(params[:search])
       # conduct some search logic
@@ -37,8 +39,8 @@ class ProjectsController < ApplicationController
   end
 
   def create
-    binding.pry
-    @project = Project.new(params[:project])
+    # binding.pry
+    @project = Project.new(project_params)
     if @project.save
       #happy path
       # THIS SECOND BIT OF NEXT LINE IS THE SAME AS FLASH MESSAGE BELOW IN DESTROY
@@ -51,7 +53,7 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @project = Project.find_by_id(params[:id])
+    @project = Project.find_by_id(project_params)
 
     if @project.update_attributes(params[:project])
       redirect_to project_path(@project), notice: 'Project was updated successfully'
@@ -75,6 +77,11 @@ class ProjectsController < ApplicationController
       redirect_to projects_path
     end
     
+  end
+
+  def project_params
+    # binding.pry
+    params.require(:project).permit(:name, :student_id)
   end
 
 end

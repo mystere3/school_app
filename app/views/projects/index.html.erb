@@ -6,7 +6,10 @@
   <h1>Project List</h1>
 <% end %>
 
+<% if current_user %>
 <h3><%= link_to "Add New Project", new_project_path %></h3>
+<% end %>
+
 <%= link_to 'Back to Student List', students_path %>
 
 <%= form_tag("/search", method: :get) do %>
@@ -19,7 +22,10 @@
   <% @projects.each do |project| %>
     <li>
     <span><%= link_to project.name, project_path(project) %></span> | 
-    <span><%= link_to "Delete", project_path(project), method: :delete, data: { confirm: "Ary you sure?"} %></span>
+    <% if current_user %>
+      | <span><%= link_to "Delete", project_path(project), method: :delete, data: { confirm: "Are you sure?"} %></span>
+    <% end %>
+    
     
     </li>
   <% end %>

@@ -1,5 +1,7 @@
 class StudentsController < ApplicationController  
 
+  before_action :authorize
+
   def index
     @students = Student.all
   end
@@ -19,7 +21,8 @@ class StudentsController < ApplicationController
   end
 
   def create
-    @student = Student.new(params[:student])
+    binding.pry
+    @student = Student.new(student_params)
     if @student.save
       #happy path
       # THIS SECOND BIT OF NEXT LINE IS THE SAME AS FLASH MESSAGE BELOW IN DESTROY
@@ -32,7 +35,7 @@ class StudentsController < ApplicationController
   end
     
   def update
-    @student = Student.find_by_id(params[:id])
+    @student = Student.find_by_id(student_params)
 
     if @student.update_attributes(params[:student])
       redirect_to student_path(@student), notice: 'Student was updated successfully'
@@ -57,4 +60,12 @@ class StudentsController < ApplicationController
     end
     
   end
+
+  private
+
+  def student_params
+    binding.pry
+    params.require(:student).permit(:email, :full_name, :phone, :hero)
+  end
 end
+
