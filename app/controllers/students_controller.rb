@@ -21,7 +21,7 @@ class StudentsController < ApplicationController
   end
 
   def create
-    binding.pry
+    # binding.pry
     @student = Student.new(student_params)
     if @student.save
       #happy path
@@ -35,6 +35,7 @@ class StudentsController < ApplicationController
   end
     
   def update
+    # binding.pry
     @student = Student.find_by_id(student_params)
 
     if @student.update_attributes(params[:student])
@@ -64,8 +65,8 @@ class StudentsController < ApplicationController
   private
 
   def student_params
-    binding.pry
-    params.require(:student).permit(:email, :full_name, :phone, :hero)
+    # binding.pry
+    params.require(:student).permit(:email, :full_name, :phone, :hero, :course_ids => [])
   end
 end
 

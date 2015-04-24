@@ -12,6 +12,8 @@
   <%= f.label :hero %>
   <%= f.text_field :hero %> <br>
 
+  <%= collection_check_boxes(:student, :course_ids, Course.all, :id, :name) %>
+
   <%= f.submit %>
 
 <% end %>

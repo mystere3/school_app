@@ -53,9 +53,9 @@ class ProjectsController < ApplicationController
   end
 
   def update
-    @project = Project.find_by_id(project_params)
+    @project = Project.find_by_id(params[:project])
 
-    if @project.update_attributes(params[:project])
+    if @project.update_attributes(project_params)
       redirect_to project_path(@project), notice: 'Project was updated successfully'
     else
       flash[:alert] = 'There was an error updating the project'
