@@ -1,6 +1,6 @@
 class StudentsController < ApplicationController  
 
-  before_action :authorize
+  before_action :authenticate_user!
 
   def index
     @students = Student.all

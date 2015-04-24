@@ -4,11 +4,11 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
   private
-  def current_user
-    # this uses session[:user id] unless its nil - less server calls
-    @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
+  # def current_user
+  #   # this uses session[:user id] unless its nil - less server calls
+  #   @current_user ||= User.find_by_id(session[:user_id]) if session[:user_id]
     
-  end
+  # end
 
   def authorize
     redirect_to :root, alert: 'You must be logged in to view this page' if current_user.nil?
