@@ -36,9 +36,9 @@ class StudentsController < ApplicationController
     
   def update
     # binding.pry
-    @student = Student.find_by_id(student_params)
+    @student = Student.find_by_id(params[:id])
 
-    if @student.update_attributes(params[:student])
+    if @student.update_attributes(student_params)
       redirect_to student_path(@student), notice: 'Student was updated successfully'
     else
       flash[:alert] = 'There was an error updating the student'
