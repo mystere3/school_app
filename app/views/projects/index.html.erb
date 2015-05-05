@@ -1,33 +1,61 @@
-
-
-<% if @student.present? %>
-  <h2><%= @student.full_name %>'s Projects</h2>
-<% else %>
-  <h1>Project List</h1>
-<% end %>
-
-<% if current_user %>
-<h3><%= link_to "Add New Project", new_project_path %></h3>
-<% end %>
-
-<%= link_to 'Back to Student List', students_path %>
-
-<%= form_tag("/search", method: :get) do %>
-  <%= label_tag(:search, "Search") %>
-  <%= text_field_tag(:search) %>
-  <%= submit_tag("Search") %>
-  <% end %>
-
-<ul>
-  <% @projects.each do |project| %>
-    <li>
-    <span><%= link_to project.name, project_path(project) %></span> | 
-    <% if current_user %>
-      | <span><%= link_to "Delete", project_path(project), method: :delete, data: { confirm: "Are you sure?"} %></span>
+<div class='row'>
+  <div class='col-md-12'>
+    <% if @student.present? %>
+      <h1><%= @student.full_name %>'s Projects</h1>
+    <% else %>
+      <h1>Project List</h1>
     <% end %>
-    
-    
-    </li>
-  <% end %>
-  
-</ul>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-3'>
+    <% if current_user %>
+      <h4><%= link_to "Add New Project", new_project_path %></h4>
+    <% end %>
+  </div>
+  <div class="col-md-5">
+    <%= form_tag("/search", method: :get, :class => "navbar-form") do %>
+      <%= label_tag(:search, "Search for a project: ") %>
+      <%= text_field_tag(:search) %>
+      <%= submit_tag("Search") %>
+    <% end %>
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-8'>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Project Name</th>
+          <th>Options</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @projects.each do |project| %>
+          <tr>
+            <td><%= link_to project.name, project_path(project) %></td>
+            <% if current_user %>
+              <td><%= link_to "Delete", project_path(project), method: :delete, data: { confirm: "Are you sure?"} %></td>
+            <% end %>
+          </tr>
+        <% end %>
+        
+      </tbody>
+
+    </table>
+  </div>
+</div>
+
+
+
+
+
+<!-- <form class="navbar-form navbar-left" role="search">
+  <div class="form-group">
+    <input type="text" class="form-control" placeholder="Search">
+  </div>
+  <button type="submit" class="btn btn-default">Submit</button>
+</form> -->
+
+
+

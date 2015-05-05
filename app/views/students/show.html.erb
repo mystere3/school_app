@@ -1,24 +1,61 @@
-<h1>Student Profile</h1>
+<div class='row'>
+  <div class='col-md-12'>
+    <h1>Student Profile</h1>    
+  </div>
+</div>
+<div class='row'>
+  <div class='col-md-8'>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Email</th>
+          <th>Name</th>
+          <th>Phone</th>
+          <th>Hero</th>
+          <th>Created</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= @student.email %></td>
+          <td><%= @student.full_name %></td>
+          <td><%= formatted_phone_number(@student.phone) %></td>
+          <td><%= @student.hero %></td>
+          <td><%= time_ago_in_words(@student.created_at) %> ago</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-4">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Courses</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @student.courses.each do |course| %>
+          <tr><td> <%= course.name %> </td></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="col-md-4">
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Projects</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @projects.each do |project| %>
+          <tr><td> <%= project.name %> </td></tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>
 
-<%= link_to 'Back to Student List', students_path %>
-<%= link_to 'Edit Student', edit_student_path(@student) %>
 
-<h2><span>Email</span>: <%= @student.email %></h2>
-<h2><span>Name</span>: <%= @student.full_name %></h2>
-<h2><span>Phone</span>: <%= formatted_phone_number(@student.phone) %></h2>
-<h2><span>Hero</span>: <%= @student.hero %></h2>
-<h2><span>Created</span>: <%= time_ago_in_words(@student.created_at) %> ago</h2>
-
-<h2>Courses</h2>
-<ul>
-  <% @student.courses.each do |course| %>
-  <li> <%= course.name %> </li>
-  <% end %>
-</ul>
-
-<h2>Projects</h2>
-<ul>
-  <% @projects.each do |project| %>
-    <li> <%= project.name %> </li>
-  <% end %>
-</ul>
