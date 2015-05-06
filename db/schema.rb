@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150424004024) do
+ActiveRecord::Schema.define(version: 20150506084451) do
 
   create_table "courses", force: :cascade do |t|
     t.string   "name"
@@ -37,10 +37,14 @@ ActiveRecord::Schema.define(version: 20150424004024) do
     t.string   "email"
     t.string   "full_name"
     t.string   "phone"
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
+    t.datetime "created_at",                         null: false
+    t.datetime "updated_at",                         null: false
     t.string   "hero"
-    t.boolean  "paid_in_full", default: false
+    t.boolean  "paid_in_full",       default: false
+    t.string   "photo_file_name"
+    t.string   "photo_content_type"
+    t.integer  "photo_file_size"
+    t.datetime "photo_updated_at"
   end
 
   create_table "users", force: :cascade do |t|

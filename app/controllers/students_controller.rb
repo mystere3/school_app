@@ -66,7 +66,7 @@ class StudentsController < ApplicationController
 
   def student_params
     # binding.pry
-    params.require(:student).permit(:email, :full_name, :phone, :hero, :course_ids => [])
+    params.require(:student).permit(:email, :full_name, :phone, :hero, :photo, :course_ids => [])
   end
 end
 
